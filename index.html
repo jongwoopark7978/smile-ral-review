@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SMILE: Smooth Motion for Improved Long-Horizon VLA Execution</title>
+  <meta name="description" content="Anonymous project page for SMILE: Smooth Motion for Improved Long-Horizon VLA Execution.">
+  <style>
+    :root {
+      --bg: #f5f6f7;
+      --surface: #ffffff;
+      --surface-soft: #eef3f4;
+      --text: #20242c;
+      --muted: #5c6672;
+      --accent: #1f8a7a;
+      --accent-warm: #bf6430;
+      --smile-blue: #2563eb;
+      --baseline-red: #dc2626;
+      --plain-green: #16a34a;
+      --cluttered-surface: #eaf3ff;
+      --plain-surface: #eaf8ee;
+      --demo-surface: #f3f0d4;
+      --border: rgba(31, 36, 44, 0.12);
+      --shadow: 0 12px 28px rgba(31, 36, 44, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 38px 0 24px;
+      text-align: center;
+    }
+
+    .hero-label {
+      margin: 0 0 14px;
+      color: var(--accent-warm);
+      font-size: 0.95rem;
+      font-weight: 760;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 1040px;
+      margin: 0 auto 14px;
+      font-size: 4rem;
+      line-height: 1.05;
+      letter-spacing: 0;
+      font-weight: 780;
+    }
+
+    .hero h2 {
+      max-width: 1040px;
+      margin: 0 auto;
+      color: #252a32;
+      font-size: 2rem;
+      line-height: 1.18;
+      letter-spacing: 0;
+      font-weight: 720;
+    }
+
+    .title-accent {
+      color: var(--smile-blue);
+    }
+
+    .section {
+      padding: 32px 0;
+    }
+
+    .section-title {
+      margin: 0 0 22px;
+      text-align: center;
+      font-size: 2.65rem;
+      line-height: 1.1;
+      letter-spacing: 0;
+      font-weight: 760;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 20px;
+      max-width: 602px;
+      margin: 0 auto;
+    }
+
+    .demo-card,
+    .example-card,
+    .figure-card,
+    .abstract-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .demo-card {
+      overflow: hidden;
+    }
+
+    .video-pair {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 63px minmax(0, 1fr);
+      gap: 1px;
+      padding: 12px;
+      background: var(--demo-surface);
+    }
+
+    .video-pane {
+      min-width: 0;
+      background: #111827;
+    }
+
+    .video-label {
+      padding: 8px 12px;
+      background: var(--demo-surface);
+      color: #151922;
+      font-size: 0.9rem;
+      line-height: 1.25;
+      font-weight: 720;
+      text-align: center;
+    }
+
+    .smile-label,
+    .smile-outcome {
+      color: var(--smile-blue);
+    }
+
+    .baseline-label {
+      color: var(--baseline-red);
+    }
+
+    .comparison-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 63px;
+      background: var(--demo-surface);
+      color: var(--smile-blue);
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .demo-card video {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      background: #1f2937;
+      object-fit: contain;
+    }
+
+    .demo-caption {
+      padding: 18px 20px 20px;
+      text-align: center;
+      background: var(--demo-surface);
+    }
+
+    .task-name {
+      margin: 0;
+      color: #151922;
+      font-size: 1.25rem;
+      line-height: 1.25;
+      font-weight: 760;
+    }
+
+    .task-summary {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.45;
+      font-weight: 560;
+    }
+
+    .task-prompt {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      color: #252b34;
+      font-weight: 650;
+    }
+
+    .abstract-box {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 28px 32px;
+      background: var(--surface-soft);
+      border-left: 4px solid var(--accent);
+    }
+
+    .abstract-box p {
+      margin: 0;
+      color: #252b34;
+      font-size: 1.05rem;
+    }
+
+    .figure-card {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .figure-card + .figure-card {
+      margin-top: 22px;
+    }
+
+    .architecture-card {
+      max-width: 574px;
+    }
+
+    .figure-card img {
+      width: 100%;
+      background: #ffffff;
+    }
+
+    .figure-card figcaption {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.55;
+    }
+
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .demo-setting + .demo-setting {
+      margin-top: 32px;
+    }
+
+    .demo-setting {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .demo-setting.cluttered-setting {
+      background: var(--cluttered-surface);
+    }
+
+    .demo-setting.plain-setting {
+      background: var(--plain-surface);
+    }
+
+    .setting-title {
+      margin: 0 0 16px;
+      text-align: center;
+      color: #151922;
+      font-size: 1.65rem;
+      line-height: 1.2;
+      font-weight: 760;
+    }
+
+    .example-card {
+      overflow: hidden;
+    }
+
+    .example-card video {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      background: #1f2937;
+      object-fit: contain;
+    }
+
+    .footer-space {
+      height: 26px;
+    }
+
+    @media (max-width: 900px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .hero h2 {
+        font-size: 1.55rem;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+
+      .examples-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .hero {
+        padding-top: 30px;
+      }
+
+      .hero h1 {
+        font-size: 2.35rem;
+      }
+
+      .hero h2 {
+        font-size: 1.22rem;
+      }
+
+      .section {
+        padding: 26px 0;
+      }
+
+      .section-title {
+        font-size: 1.95rem;
+      }
+
+      .demo-grid,
+      .examples-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .video-pair {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-arrow {
+        min-height: 63px;
+      }
+
+      .abstract-box,
+      .figure-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="hero">
+      <p class="hero-label">Anonymous Review Page</p>
+      <h1><span class="title-accent">SMILE</span></h1>
+      <h2>Smooth Motion for Improved Long-Horizon VLA Execution</h2>
+    </section>
+
+    <section id="demos" class="section">
+      <h2 class="section-title">SMILE vs. Baseline VLA</h2>
+      <div class="demo-grid" aria-label="SMILE demo video comparisons">
+        <article class="demo-card">
+          <div class="video-pair">
+            <div class="video-pane">
+              <p class="video-label smile-label">SMILE-VLA (Success)</p>
+              <video autoplay loop muted playsinline preload="metadata" aria-label="SMILE demo for the cluttered localization task without hitting surrounding objects">
+                <source src="videos/cropped/hit_smile_no_hitting.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="comparison-arrow" aria-hidden="true">←</div>
+            <div class="video-pane">
+              <p class="video-label baseline-label">Baseline VLA (Fail)</p>
+              <video autoplay loop muted playsinline preload="metadata" aria-label="Baseline demo for the cluttered localization task with contact against surrounding objects">
+                <source src="videos/cropped/hit_baseline_hitting.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <div class="demo-caption">
+            <p class="task-name smile-outcome">SMILE avoids contact with surrounding objects.</p>
+            <p class="task-summary task-prompt">&lt;Lift the grape and place it in the basket.&gt;</p>
+          </div>
+        </article>
+
+        <article class="demo-card">
+          <div class="video-pair">
+            <div class="video-pane">
+              <p class="video-label smile-label">SMILE-VLA (Success)</p>
+              <video autoplay loop muted playsinline preload="metadata" aria-label="SMILE demo for the relative height task without dropping the target object">
+                <source src="videos/cropped/drop_smile_no_drop.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="comparison-arrow" aria-hidden="true">←</div>
+            <div class="video-pane">
+              <p class="video-label baseline-label">Baseline VLA (Fail)</p>
+              <video autoplay loop muted playsinline preload="metadata" aria-label="Baseline demo for the relative height task where the target object is dropped">
+                <source src="videos/cropped/drop_baseline_drop.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <div class="demo-caption">
+            <p class="task-name smile-outcome">SMILE keeps the target object securely grasped without dropping it.</p>
+            <p class="task-summary task-prompt">&lt;Lift the orange and place it in the basket.&gt;</p>
+          </div>
+        </article>
+
+        <article class="demo-card">
+          <div class="video-pair">
+            <div class="video-pane">
+              <p class="video-label smile-label">SMILE-VLA (Success)</p>
+              <video autoplay loop muted playsinline preload="metadata" aria-label="SMILE demo for the relative height task with successful pickup">
+                <source src="videos/cropped/failpickup_smile_no_failpickup.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="comparison-arrow" aria-hidden="true">←</div>
+            <div class="video-pane">
+              <p class="video-label baseline-label">Baseline VLA (Fail)</p>
+              <video autoplay loop muted playsinline preload="metadata" aria-label="Baseline demo for the relative height task with failed pickup attempts">
+                <source src="videos/cropped/failpickup_baseline_failpickup.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <div class="demo-caption">
+            <p class="task-name smile-outcome">SMILE picks up the target object within a few attempts.</p>
+            <p class="task-summary task-prompt">&lt;Lift the apple and place it in the basket.&gt;</p>
+          </div>
+        </article>
+
+        <article class="demo-card">
+          <div class="video-pair">
+            <div class="video-pane">
+              <p class="video-label smile-label">SMILE-VLA (Success)</p>
+              <video autoplay loop muted playsinline preload="metadata" aria-label="SMILE demo for the color match task inside the valid boundary">
+                <source src="videos/cropped/outbound_smile_no_outofbound.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="comparison-arrow" aria-hidden="true">←</div>
+            <div class="video-pane">
+              <p class="video-label baseline-label">Baseline VLA (Fail)</p>
+              <video autoplay loop muted playsinline preload="metadata" aria-label="Baseline demo for the color match task moving outside the valid boundary">
+                <source src="videos/cropped/outbound_baseline_outofbound.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <div class="demo-caption">
+            <p class="task-name smile-outcome">SMILE picks up the target object while staying inside the valid boundary.</p>
+            <p class="task-summary task-prompt">&lt;Lift the kiwi and place it in the basket.&gt;</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="abstract" class="section">
+      <h2 class="section-title">Abstract</h2>
+      <div class="abstract-box">
+        <p>Vision-Language-Action (VLA) models reduce inference cost by executing multiple actions per call, but longer horizons often degrade accuracy because raw chunks contain jitter and outliers. We introduce SMILE, an architecture-preserving interface that predicts B-spline coefficients and decodes them into smooth action sequences. SMILE changes only the action representation, enabling longer fixed horizons while retaining each baseline's backbones and model scale. We apply SMILE to SmolVLA, Evo1, VPP, and DAWN. All integrations improve accuracy and amortized inference efficiency on LIBERO, CALVIN, and real-world experiments. SMILE-Evo1 reaches 98.0% with a 1.1x speedup in LIBERO, while SMILE-VPP reaches 4.42 with a 1.5x speedup in CALVIN. At a matched execution horizon of 10, SMILE-SmolVLA reduces non-boundary acceleration by 78.6% and velocity sign-change rate by 42.3%. Real-world xArm tests show higher success, fewer drops, and fewer contacts. These results establish smooth coefficient-space generation as a route to accurate, efficient long-horizon VLA execution. All code and models will be released publicly.</p>
+      </div>
+    </section>
+
+    <section id="architecture" class="section">
+      <h2 class="section-title">Architecture</h2>
+      <figure class="figure-card architecture-card">
+        <img src="images/smile_architecture.png" alt="SMILE architecture overview showing B-spline coefficient tokens and coefficient heads replacing the raw action sequence interface.">
+        <figcaption>SMILE replaces only the action-side raw sequence interface with B-spline coefficient tokens and coefficient heads that decode to smooth micro-actions. The original VLA backbone, conditioner, and main denoising action-expert block are retained.</figcaption>
+      </figure>
+    </section>
+
+    <section id="accuracy-efficiency" class="section">
+      <h2 class="section-title">Accuracy-Efficiency Comparison</h2>
+      <figure class="figure-card">
+        <img src="images/pareto_accuracy_latency_model_size.png" alt="Accuracy-efficiency comparison on LIBERO showing success versus amortized inference latency per action.">
+        <figcaption>Accuracy-efficiency comparison on LIBERO. Marker size denotes model scale; SMILE improves the accuracy-efficiency trade-off at comparable model size.</figcaption>
+      </figure>
+    </section>
+
+    <section id="additional-demos" class="section">
+      <h2 class="section-title">Additional Successful SMILE Demos</h2>
+      <div class="demo-setting cluttered-setting">
+        <h3 class="setting-title">Cluttered Setting</h3>
+        <div class="examples-grid" aria-label="Additional cluttered setting demo videos">
+          <article class="example-card">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Additional cluttered setting demo 1">
+              <source src="videos/cropped/additional/cluttered_general.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </article>
+          <article class="example-card">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Additional cluttered apple demo">
+              <source src="videos/cropped/additional/cluttered_apple.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </article>
+          <article class="example-card">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Additional cluttered banana demo">
+              <source src="videos/cropped/additional/cluttered_banana.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </article>
+          <article class="example-card">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Additional cluttered grape demo 1">
+              <source src="videos/cropped/additional/cluttered_grape_1.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </article>
+          <article class="example-card">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Additional cluttered grape demo 2">
+              <source src="videos/cropped/additional/cluttered_grape_2.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </article>
+          <article class="example-card">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Additional cluttered kiwi demo">
+              <source src="videos/cropped/additional/cluttered_kiwi.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </article>
+        </div>
+      </div>
+
+      <div class="demo-setting plain-setting">
+        <h3 class="setting-title">Plain Setting</h3>
+        <div class="examples-grid" aria-label="Additional plain setting demo videos">
+          <article class="example-card">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Additional plain apple demo">
+              <source src="videos/cropped/additional/plain_apple.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </article>
+          <article class="example-card">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Additional plain avocado demo 1">
+              <source src="videos/cropped/additional/plain_avocado_1.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </article>
+          <article class="example-card">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Additional plain avocado demo 2">
+              <source src="videos/cropped/additional/plain_avocado_2.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </article>
+          <article class="example-card">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Additional plain banana demo">
+              <source src="videos/cropped/additional/plain_banana.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </article>
+          <article class="example-card">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Additional plain kiwi demo">
+              <source src="videos/cropped/additional/plain_kiwi.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </article>
+          <article class="example-card">
+            <video autoplay loop muted playsinline preload="metadata" aria-label="Additional plain orange demo">
+              <source src="videos/cropped/additional/plain_orange.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-space" aria-hidden="true"></div>
+  </main>
+  <script>
+    document.querySelectorAll("#demos video, #additional-demos video").forEach((video) => {
+      video.playbackRate = 2;
+      video.defaultPlaybackRate = 2;
+    });
+  </script>
+</body>
+</html>
